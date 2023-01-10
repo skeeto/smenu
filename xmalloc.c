@@ -17,7 +17,6 @@
 #include <string.h>
 #include <errno.h>
 
-#include "config.h"
 #include "xmalloc.h"
 
 /* The following rpl_* function are necessary for AIX which doesn't     */

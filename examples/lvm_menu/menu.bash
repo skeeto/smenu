@@ -19,7 +19,7 @@
 # ============== #
 function usage
 {
-  echo "menu.sh [-i] title [smenu options]"
+  echo "menu.bash [-i] title [smenu options]"
   exit 1
 }
 

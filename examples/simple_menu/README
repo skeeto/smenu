@@ -32,10 +32,10 @@ EXIT : Exits the menu without outputting anything.
 As usual, 'ENTER' triggers the selection and 'q' quits the menu without
 outputting anything.
 
-To launch the demo, first, make sure to make simple_menu.sh executable
-(chmod +x simple_menu.sh actions.sh) and enter:
+To launch the demo, first, make sure to make simple_menu.bash executable
+(chmod +x simple_menu.bash actions.bash) and enter:
 
-./simple_menu.sh main.mnu ./actions.sh
+./simple_menu.bash main.mnu ./actions.bash
 
 The first argument is the main menu file and the second one is the path
 of the program which will be called each time a selection is made. This

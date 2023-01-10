@@ -33,7 +33,7 @@ do
    echo
 
    MESSAGE="LVM management"
-   read REP <<< $(echo "$MENU" | ./menu.sh -p $SMENU -i "$MESSAGE" "-Re1")
+   read REP <<< $(echo "$MENU" | ./menu.bash -p $SMENU -i "$MESSAGE" "-Re1")
 
    case $REP in
      ABORT) exit 1         ;;

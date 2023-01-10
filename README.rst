@@ -39,19 +39,12 @@ animations that detail some concepts and features of **smenu**.
 
 How to build it?
 ================
-Some Linux distributions already provide **smenu** as a package,
-if not, **smenu** can be built on any system on which a functional
-``terminfo`` development platform is available.
-This includes all Unix and Unix-like systems that I know of.
+**smenu** can be built on any system on which a functional ``terminfo``
+development platform is available.
 
-Please use the provided ``build.sh`` script to build the executable.
-This script uses and accepts the same arguments as the GNU ``configure``
-script, type ``build.sh --help`` to see them.
+::
 
-How to install it?
-==================
-Once the build process is complete, a simple ``make install`` with the
-appropriate privileges will do it.
+  $ cc -o smenu smenu.c -lcurses
 
 Issue vs Discussion.
 ====================

@@ -50,11 +50,20 @@ void
 ll_sort(ll_t * list, int (*comp)(void const *, void const *),
         void (*swap)(void **, void **));
 
+void
+ll_insert_after(ll_t * const list, ll_node_t * node, void * const data);
+
+void
+ll_insert_before(ll_t * const list, ll_node_t * node, void * const data);
+
 int
 ll_delete(ll_t * const list, ll_node_t * node);
 
 ll_node_t *
 ll_find(ll_t * const, void * const, int (*)(void const *, void const *));
+
+int
+ll_strarray(ll_t * , ll_node_t *, int *, char ***);
 
 void
 ll_free(ll_t * const list, void (*clean)(void *));

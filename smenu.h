@@ -17,8 +17,6 @@
 #define TPARM2(p, q) tparm(p, q, 0, 0, 0, 0, 0, 0, 0, 0)
 #define TPARM3(p, q, r) tparm(p, q, r, 0, 0, 0, 0, 0, 0, 0)
 
-#define _XOPEN_SOURCE 700
-
 /* Used for timers management. */
 /* """"""""""""""""""""""""""" */
 #define SECOND 1000000

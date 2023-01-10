@@ -8,7 +8,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 # ###################################################################
 
-# Find backwards for the directory where test.sh is
+# Find backwards for the directory where test.bash is
 # """""""""""""""""""""""""""""""""""""""""""""""""
 upsearch () {
   slashes=$(echo $PWD | tr -cd \/)
@@ -21,7 +21,7 @@ upsearch () {
   done
 }
 
-[ -z "$DIR" ] && DIR=$(upsearch test.sh) && export DIR
+[ -z "$DIR" ] && DIR=$(upsearch test.bash) && export DIR
 
 if [ ! -f $1.tst ]; then
   echo "Unknown test $1"

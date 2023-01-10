@@ -54,7 +54,7 @@ for INDEX in $LIST; do
 
   TST=${INDEX##*/}
 
-  $DIR/test.sh ${TST%.tst} || exit 1
+  $DIR/test.bash ${TST%.tst} || exit 1
 
   [ $SUBDIR != $INDEX ] && cd -
 done

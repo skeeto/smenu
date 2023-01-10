@@ -10,7 +10,6 @@
 /* Various small utility functions. */
 /* ******************************** */
 
-#include "config.h"
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>

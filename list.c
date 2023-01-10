@@ -96,6 +96,88 @@ ll_append(ll_t * const list, void * const data)
   ++list->len; /* One more node in the list. */
 }
 
+/* ================================================================== */
+/* Put a new node filled with its data at the beginning of the linked */
+/* list.                                                              */
+/* The user is responsible for the memory management of the data.     */
+/* ================================================================== */
+static void
+ll_prepend(ll_t * const list, void * const data)
+{
+  ll_node_t * node;
+
+  node = ll_new_node(); /* ll_new_node cannot return NULL because it   *
+                         | uses xmalloc which does not return if there *
+                         | is an allocation error.                     */
+
+  node->data = data;
+  node->prev = NULL;       /* This node will be the first. */
+  node->next = list->head; /* NULL if it is a new list.    */
+
+  if (list->head)
+    list->head->prev = node;
+  else
+    list->tail = node;
+
+  list->head = node;
+
+  ++list->len; /* One more node in the list. */
+}
+
+/* ======================================================== */
+/* Insert a new node before the specified node in the list. */
+/* ======================================================== */
+void
+ll_insert_before(ll_t * const list, ll_node_t * node, void * const data)
+{
+  ll_node_t * new_node;
+
+  if (node->prev == NULL)
+    ll_prepend(list, data);
+  else
+  {
+    new_node = ll_new_node(); /* ll_new_node cannot return NULL because it   *
+                               | uses xmalloc which does not return if there *
+                               | is an allocation error.                     */
+
+    new_node->data = data;
+    new_node->next = node;
+    new_node->prev = node->prev;
+
+    node->prev->next = new_node;
+    node->prev       = new_node;
+
+    ++list->len; /* One more node in the list. */
+  }
+}
+
+/* ======================================================= */
+/* Insert a new node after the specified node in the list. */
+/* ======================================================= */
+void
+ll_insert_after(ll_t * const list, ll_node_t * node, void * const data)
+{
+  ll_node_t * new_node;
+
+  if (node->next == NULL)
+    ll_append(list, data);
+  else
+  {
+    new_node = ll_new_node(); /* ll_new_node cannot return NULL because it   *
+                               | uses xmalloc which does not return if there *
+                               | is an allocation error.                     */
+
+    new_node->data = data;
+    new_node->prev = node;
+    new_node->next = node->next;
+
+    node->next->prev = new_node;
+    node->next       = new_node;
+
+    ++list->len; /* One more node in the list. */
+  }
+}
+
 /* ================================== */
 /* Removes a node from a linked list. */
 /* ================================== */
@@ -229,6 +311,51 @@ ll_find(ll_t * const list, void * const data,
   } while (NULL != (node = node->next));
 
   return NULL;
+}
+
+/* ==================================================================== */
+/* Allocate and fill an array of strings from a list.                   */
+/* WARNINGS:                                                            */
+/*   1) The list node must contain strings (char *).                    */
+/*   2) The strings in the resulting array MUST NOT be freed as the are */
+/*      NOT copied from the strings of the list.                        */
+/*                                                                      */
+/* IN list       : The list from which the array is generated.          */
+/* IN start_node : The node of the list which will be the first node to */
+/*                 consider to create the array.                        */
+/* OUT: count    : The number of elements of the resulting array.       */
+/* OUT: array    : The resulting array or NULL if the list is empty.    */
+/* RC :          : The number of elements of the resulting array.       */
+/* ==================================================================== */
+int
+ll_strarray(ll_t * list, ll_node_t * start_node, int * count, char *** array)
+{
+  int         n = 0;
+  ll_node_t * node;
+
+  *count = 0;
+
+  node = start_node;
+
+  if (list == NULL || node == NULL)
+  {
+    *array = NULL;
+
+    return 0;
+  }
+
+  *array = xmalloc((list->len + 1) * sizeof(char *));
+  while (node != NULL)
+  {
+    (*array)[n++] = (char *)(node->data);
+    (*count)++;
+
+    node = node->next;
+  }
+
+  (*array)[*count] = NULL;
+
+  return *count;
 }
 
 /* =============================================== */

@@ -6,7 +6,7 @@
 /* file, You can obtain one at https://mozilla.org/MPL/2.0/.           */
 /* ################################################################### */
 
-#include "config.h"
+#define _XOPEN_SOURCE 700
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
@@ -42,6 +42,23 @@
 #include "usage.h"
 #include "safe.h"
 #include "smenu.h"
+
+#ifndef VERSION
+#  define VERSION 1.2.0
+#endif
+
+#define XSTR(s) #s
+#define STR(s) XSTR(s)
+
+#include "fgetc.c"
+#include "index.c"
+#include "list.c"
+#include "safe.c"
+#include "usage.c"
+#include "utf8.c"
+#include "utils.c"
+#include "xmalloc.c"
+#include "ctxopt.c"
 
 /* ***************** */
 /* Extern variables. */
@@ -6031,7 +6048,7 @@ version_action(char * ctx_name, char * opt_name, char * param, int nb_values,
                char ** values, int nb_opt_data, void ** opt_data,
                int nb_ctx_data, void ** ctx_data)
 {
-  fputs_safe("Version: " VERSION "\n", stdout);
+  fputs_safe("Version: " STR(VERSION) "\n", stdout);
   exit(EXIT_SUCCESS);
 }
 
